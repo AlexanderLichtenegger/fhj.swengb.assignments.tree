@@ -1,5 +1,4 @@
-package fhj.swengb.assignments.tree.rladstaetter
-
+package fhj.swengb.assignments.tree.alichtenegger
 
 /**
   * Created by lad on 09.11.15.

@@ -1,4 +1,4 @@
-package fhj.swengb.assignments.tree.rladstaetter
+package fhj.swengb.assignments.tree.alichtenegger
 
 import javafx.scene.paint.Color
 
@@ -78,7 +78,10 @@ object MathUtil {
     * @return
     */
   def round(value: Double): Double = {
-    ???
+    //Commit
+    val roundedValue: Double = BigDecimal(value).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+    return roundedValue
+
   }
 
   /**
@@ -88,7 +91,8 @@ object MathUtil {
     * @return
     */
   def toRadiants(angle: AngleInDegrees): AngleInRadiants = {
-   ???
+    //Commit
+    math.toRadians(angle)
   }
 }
 
@@ -108,7 +112,11 @@ object L2D {
     * @return
     */
   def apply(start: Pt2D, angle: AngleInDegrees, length: Double, color: Color): L2D = {
-    ???
+    //Commit
+    val a = round(start.x + Math.cos(toRadiants(angle))*length)
+    val b = round(start.y + Math.sin(toRadiants(angle))*length)
+    val end = Pt2D(a,b)
+    return L2D(start:Pt2D,end,color)
   }
 
 
