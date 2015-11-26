@@ -41,9 +41,11 @@ object Graph {
     */
   def traverse[A, B](tree: Tree[A])(convert: A => B): Seq[B] = {
     def traverseRec[A,B](tree:Tree[A],acc:Seq[B])(convert: A => B): Seq[B] = tree match {
+
       case Node(x) => convert(x) +: acc
       case Branch(l,r) => traverseRec(l,acc)(convert) ++ acc ++ traverseRec(r,acc)(convert)
     }
+
     traverseRec(tree,acc=Nil)(convert)
   }
 
@@ -70,16 +72,18 @@ object Graph {
     assert(treeDepth <= colorMap.size, s"Treedepth higher than color mappings - bailing out ...")
 
     def insert(point: L2D, acc: Int): Tree[L2D] = acc match {
+
       case last if (acc == treeDepth) => Branch(Node(point), Branch(Node(point.left(factor, angle, colorMap(acc - 1))), Node(point.right(factor, angle, colorMap(acc - 1)))))
       case _ => Branch(Node(point), Branch(insert(point.left(factor, angle, colorMap(acc - 1)), acc + 1), insert(point.right(factor, angle, colorMap(acc - 1)), acc + 1)))
     }
-      //L2D wird in apply aufgerufen (start, end, color)
+
       val acc = 1
       val startpt = L2D(start, initialAngle, length, colorMap(acc - 1))
-    //Verbindung zwischen start und end
+
     acc match {
-        case root if (treeDepth == 0) => Node(startpt)
-        case tree => insert(startpt, acc)
+
+      case root if (treeDepth == 0) => Node(startpt)
+      case tree => insert(startpt, acc)
     }
   }
 }
@@ -93,7 +97,9 @@ object MathUtil {
     * @return
     */
   def round(value: Double): Double = {
+
     val roundedValue: Double = BigDecimal(value).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+
     return roundedValue
   }
 
@@ -104,6 +110,7 @@ object MathUtil {
     * @return
     */
   def toRadiants(angle: AngleInDegrees): AngleInRadiants = {
+
     math.toRadians(angle)
   }
 }
@@ -124,11 +131,12 @@ object L2D {
     * @return
     */
   def apply(start: Pt2D, angle: AngleInDegrees, length: Double, color: Color): L2D = {
-    //Startpunkt und Winkel (Cosinus für x-Koordinate, Sinus für y-Koordinate) mal Länge für Endpunkt
+
     val x = round(start.x + Math.cos(toRadiants(angle))*length)
     val y = round(start.y + Math.sin(toRadiants(angle))*length)
+
     val end = Pt2D(x,y)
-    //farbige Linie von Startpunkt und Endpunkt
+
     return L2D(start:Pt2D,end,color)
   }
 }
