@@ -2,6 +2,7 @@ package fhj.swengb.assignments.tree.rladstaetter
 
 import javafx.scene.paint.Color
 
+import fhj.swengb.assignments.tree.alichtenegger._
 import org.junit.Assert._
 import org.junit.Test
 
